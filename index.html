@@ -10,30 +10,12 @@
   <video id="video" width="640" controls autoplay muted></video>
   <div id="error" style="color: red;"></div>
 
-  <script>
-    const manifestUri = "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd";
+<script>
+  const videoUrl = "https://cors-anywhere.herokuapp.com/https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd";
+  const player = dashjs.MediaPlayer().create();
+  player.initialize(document.getElementById('videoPlayer'), videoUrl, true);
+</script>
 
-    async function initApp() {
-      const video = document.getElementById('video');
-      const errorDiv = document.getElementById('error');
-      const player = new shaka.Player(video);
-
-      player.addEventListener('error', (event) => {
-        const error = event.detail;
-        errorDiv.textContent = `Error Code: ${error.code}, Data: ${JSON.stringify(error.data)}`;
-      });
-
-      try {
-        await player.load(manifestUri);
-        console.log('Video loaded successfully!');
-      } catch (error) {
-        console.error('Failed to load the video:', error);
-        errorDiv.textContent = `Failed to load the video: ${error.message}`;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', initApp);
-  </script>
 </body>
 </html>
 
