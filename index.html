@@ -4,16 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Play DASH Video</title>
-  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.2.2/shaka-player.min.js"></script>
 </head>
 <body>
-  <video id="videoPlayer" controls width="600" autoplay></video>
+  <video id="video" width="640" controls autoplay></video>
 
   <script>
-    const videoUrl = "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd";
-    const player = dashjs.MediaPlayer().create();
-    player.initialize(document.getElementById('videoPlayer'), videoUrl, true);
+    const manifestUri = "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd";
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const video = document.getElementById('video');
+      const player = new shaka.Player(video);
+
+      try {
+        await player.load(manifestUri);
+        console.log('The video has been loaded!');
+      } catch (e) {
+        console.error('Error loading video:', e);
+      }
+    });
   </script>
 </body>
 </html>
+
 
