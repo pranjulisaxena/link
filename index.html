@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Play Video from URL</title>
+  <title>Play DASH Video</title>
+  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
 </head>
 <body>
-  <video controls width="600">
-    <source src="https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd" type="video/mpd">
-  </video>
+  <video id="videoPlayer" controls width="600" autoplay></video>
+
+  <script>
+    const videoUrl = "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd";
+    const player = dashjs.MediaPlayer().create();
+    player.initialize(document.getElementById('videoPlayer'), videoUrl, true);
+  </script>
 </body>
 </html>
+
